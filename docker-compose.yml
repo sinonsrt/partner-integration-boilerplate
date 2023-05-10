@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  oracledb:
+    container_name: oracledb
+    image: gvenzl/oracle-xe
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: "admin"
