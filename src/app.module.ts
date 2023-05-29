@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ManageProposalController } from './controller/manage-proposal.controller';
+import { ManageProposalService } from './service/manage-proposal.service';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [ManageProposalController],
+  providers: [ManageProposalService],
 })
 export class AppModule {}
