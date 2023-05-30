@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ManageProposalController } from './controller/manage-proposal.controller';
 import { ManageProposalService } from './service/manage-proposal.service';
+import { Proposal } from './entities/Proposal';
 
 @Module({
   imports: [
@@ -12,7 +13,9 @@ import { ManageProposalService } from './service/manage-proposal.service';
       username: 'root',
       password: 'root',
       database: 'test',
-      entities: [],
+      entities: [Proposal],
+      migrations: ['../src/infra/database/migrations'],
+      migrationsTableName: 'migration_table',
       synchronize: true,
     }),
   ],

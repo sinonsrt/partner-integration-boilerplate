@@ -1,1 +1,1 @@
-export * from './manageProposalRequest';
+export * from './ManageProposalRequest';
