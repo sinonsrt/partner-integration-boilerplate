@@ -7,12 +7,12 @@ import { Proposal } from './entities/Proposal';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'oracle',
+      type: 'mysql',
       host: 'localhost',
-      port: 1521,
+      port: 3306,
       username: 'root',
-      password: 'root',
-      database: 'test',
+      password: 'admin',
+      database: 'PARTNER_INTEGRATION',
       entities: [Proposal],
       migrations: ['../src/infra/database/migrations'],
       migrationsTableName: 'migration_table',
