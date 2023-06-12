@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { ProposalRepository } from 'src/DAO/proposal.repository';
+import { ProposalEntity } from 'src/entities/ProposalEntity';
 
 @Injectable()
 export class ManageProposalService {
-  async manageProposal(data: any) {
-    console.log(data);
+  private readonly logger = new Logger(ManageProposalService.name);
+  constructor(private proposalRepository: ProposalRepository) {}
 
-    // TODO - Criar tabela no banco de dados
-    // TODO - Salvar contratações no banco de dados
+  async manageProposal(proposal: ProposalEntity): Promise<void> {
+    await this.proposalRepository.create(proposal);
+
+    this.logger.log('Successfully inserted!');
   }
 }

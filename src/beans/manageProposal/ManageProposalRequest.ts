@@ -1,5 +1,5 @@
 export class ManageProposalRequest {
-  PARTNER: string;
+  PARCEIRO: string;
   TIPOREGISTRO: string;
   PA_CODE: string;
   DE_PARA_PLANO: string;

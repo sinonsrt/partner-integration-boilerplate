@@ -12,7 +12,7 @@ export class Proposals1685471406602 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'PARTNER',
+            name: 'PARCEIRO',
             type: 'varchar',
           },
           {

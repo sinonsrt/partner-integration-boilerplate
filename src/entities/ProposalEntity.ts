@@ -1,12 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Proposal {
+@Entity({
+  name: 'proposal',
+})
+export class ProposalEntity {
+  constructor(entity: ProposalEntity) {
+    Object.assign(this, entity);
+  }
+
   @PrimaryGeneratedColumn()
-  ID: number;
+  ID?: number;
 
   @Column()
-  PARTNER: string;
+  PARCEIRO: string;
 
   @Column()
   TIPOREGISTRO: string;
