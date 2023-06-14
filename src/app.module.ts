@@ -1,22 +1,26 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ManageProposalController } from './controller/manage-proposal.controller';
-import { ManageProposalService } from './service/manage-proposal.service';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
-      type: 'oracle',
-      host: 'localhost',
-      port: 1521,
-      username: 'root',
-      password: 'root',
-      database: 'test',
+      type: 'mysql',
+      host: process.env.DATABASE_HOST,
+      port: process.env.DATABASE_PORT,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [],
+      migrations: ['../src/infra/database/migrations'],
+      migrationsTableName: 'migration_table',
       synchronize: true,
     }),
   ],
-  controllers: [ManageProposalController],
-  providers: [ManageProposalService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
