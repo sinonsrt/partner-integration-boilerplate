@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SendProposalService } from './service/send-proposal.service';
+import { ProposalEntity } from './entities/ProposalEntity';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ProposalRepository } from './DAO/proposal.repository';
 
 @Module({
   imports: [
@@ -9,18 +13,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: process.env.DATABASE_PORT,
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      entities: [],
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'PARTNER_INTEGRATION',
+      entities: [ProposalEntity],
       migrations: ['../src/infra/database/migrations'],
       migrationsTableName: 'migration_table',
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([ProposalEntity]),
+    ScheduleModule.forRoot(),
   ],
-  controllers: [],
-  providers: [],
+  providers: [ProposalRepository, SendProposalService],
 })
 export class AppModule {}

@@ -3,9 +3,9 @@ version: '3.7'
 services:
   mysql:
     container_name: mysql
-    image: mysql
+    image: mysql:8
     ports:
       - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: PARTNER_INTEGRATION
