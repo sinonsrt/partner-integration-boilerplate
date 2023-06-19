@@ -26,11 +26,12 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
-    "@nestjs/schedule": "^2.2.3",
     "@nestjs/typeorm": "^9.0.1",
+    "@types/ssh2-sftp-client": "^9.0.0",
     "mysql2": "^3.3.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "ssh2-sftp-client": "^9.1.0",
     "typeorm": "^0.3.16"
   },
   "devDependencies": {

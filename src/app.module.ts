@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SendProposalService } from './service/send-proposal.service';
+import { SendProposalService } from './services/send-proposal.service';
 import { ProposalEntity } from './entities/ProposalEntity';
-import { ScheduleModule } from '@nestjs/schedule';
 import { ProposalRepository } from './DAO/proposal.repository';
+import { SendProposalController } from './controllers/send-proposal.controller';
+import { SFTPProvider } from './utils/providers/sftp/sftp-provider';
 
 @Module({
   imports: [
@@ -24,8 +25,8 @@ import { ProposalRepository } from './DAO/proposal.repository';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([ProposalEntity]),
-    ScheduleModule.forRoot(),
   ],
-  providers: [ProposalRepository, SendProposalService],
+  providers: [ProposalRepository, SFTPProvider, SendProposalService],
+  controllers: [SendProposalController],
 })
 export class AppModule {}

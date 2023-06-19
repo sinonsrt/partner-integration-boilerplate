@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
 import { ProposalRepository } from 'src/DAO/proposal.repository';
+import { SFTPProvider } from 'src/utils/providers/sftp/sftp-provider';
 
 @Injectable()
 export class SendProposalService {
-  constructor(private proposalRepository: ProposalRepository) {}
+  constructor(
+    private proposalRepository: ProposalRepository,
+    private SFTPProvider: SFTPProvider,
+  ) {}
 
-  @Cron('*/1 * * * * *')
   async sendProposal(): Promise<void> {
     const proposals = await this.proposalRepository.listByPartner('METLIFE');
-    console.log('PROPOSALS -> ', proposals);
+
+    await this.SFTPProvider.uploadFile('POZEVIRUS', 'É O POZE VIRUS');
   }
 }

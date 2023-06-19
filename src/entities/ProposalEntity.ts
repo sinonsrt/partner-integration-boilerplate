@@ -1,3 +1,4 @@
+import { StatusEnum } from 'src/utils/enums/StatusEnum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
@@ -73,4 +74,7 @@ export class ProposalEntity {
 
   @Column()
   PLACA: string;
+
+  @Column()
+  INTEGRADO: StatusEnum;
 }
