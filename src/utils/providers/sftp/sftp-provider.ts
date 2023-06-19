@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  writeFileSync,
-  existsSync,
-  createReadStream,
-  unlinkSync,
-  mkdirSync,
-} from 'fs';
+import { existsSync, createReadStream, unlinkSync } from 'fs';
 import ssh2 from 'ssh2';
 import ClientType from 'ssh2-sftp-client';
 
@@ -29,20 +23,10 @@ export class SFTPProvider {
     });
   }
 
-  async uploadFile(filename: string, content: any): Promise<any> {
+  async uploadFile(filePath: string, filename: string): Promise<any> {
     if (!this.connection) await this.connect();
 
-    const folderPath = `${__dirname}/../../../tmp`;
-    const tmpFilePath = `${folderPath}/${filename}.txt`;
-    const folderAlreadyExists = existsSync(folderPath);
-
-    if (!folderAlreadyExists) {
-      mkdirSync(folderPath);
-    }
-
-    writeFileSync(tmpFilePath, content);
-
-    const tmpFileExists = existsSync(tmpFilePath);
+    const tmpFileExists = existsSync(filePath);
 
     if (tmpFileExists) {
       await this.connection
@@ -50,11 +34,11 @@ export class SFTPProvider {
           console.log('SFTP conectado com sucesso!');
 
           await this.sftp.put(
-            createReadStream(tmpFilePath),
+            createReadStream(filePath),
             `./upload/${filename}.txt`,
           );
 
-          unlinkSync(tmpFilePath);
+          unlinkSync(filePath);
 
           return this.sftp.end();
         })
@@ -64,7 +48,7 @@ export class SFTPProvider {
             error.message,
           );
 
-          unlinkSync(tmpFilePath);
+          unlinkSync(filePath);
         });
     }
   }
