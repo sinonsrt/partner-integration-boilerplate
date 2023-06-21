@@ -6,6 +6,8 @@ services:
     image: mysql:8
     ports:
       - '3306:3306'
+    volumes:
+      - ./docker/mysql:/docker/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: PARTNER_INTEGRATION

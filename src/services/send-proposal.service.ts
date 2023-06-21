@@ -18,9 +18,11 @@ export class SendProposalService {
     const proposals = await this.proposalRepository.listByPartner('METLIFE');
 
     const content = this.buildContentFile(proposals);
+    console.log(content);
     const filePath = await this.createFile(filename, content);
 
-    await this.SFTPProvider.uploadFile(filePath, filename);
+    console.log(filePath);
+    // await this.SFTPProvider.uploadFile(filePath, filename);
   }
 
   private async createFile(filename: string, content: string): Promise<string> {
@@ -48,7 +50,10 @@ export class SendProposalService {
 
     // Montar as linhas do arquivo
     const linhas = proposals.map((registro) => {
-      const linha = registro.NOME + registro.DOCUMENT_NUMBER + registro.CIDADE;
+      const linha =
+        registro.NOME.padEnd(54, ' ') +
+        registro.DOCUMENT_NUMBER +
+        registro.CIDADE;
 
       return linha;
     });
@@ -80,4 +85,42 @@ export class SendProposalService {
     COMBUSTIVEL: '0',
     PLACA: 'LSL7D97'
   }
+
+   // TODO - Separar campos obrigatórios e setar campos fixos
+
+  campos obrigatórios
+
+  Identificação Seção
+  Produto
+  Plano
+  Código da Operação
+  Data da Operação
+  Meio de Pagamento
+  CPF
+  Nome
+  Sexo
+  Data Nascimento
+  Logradouro
+  Número
+  Bairro
+  Cidade
+  Estado
+  CEP
+  DDD (1)
+  Telefone1
+  DDD (3)
+  Telefone3
+  Preferência Telefone
+  Estado Civil
+  Importância Segurada
+  Prêmio
+  Periodicidade do Prêmio
+  Data do Primeiro Vencimento
+  Canal de Venda
+  Código Campanha
+  Id Segurado
+  Tipo de Logradouro
+  Flag Dental
+  Filler
+
  */
