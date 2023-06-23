@@ -1,5 +1,5 @@
-import { StatusEnum } from 'src/utils/enums/StatusEnum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { StatusEnum } from '../utils/enums/StatusEnum';
 
 @Entity({
   name: 'proposal',

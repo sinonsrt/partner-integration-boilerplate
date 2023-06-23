@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SendProposalService } from './services/send-proposal.service';
 import { ProposalEntity } from './entities/ProposalEntity';
-import { ProposalRepository } from './DAO/proposal.repository';
 import { SendProposalController } from './controllers/send-proposal.controller';
+import { ProposalRepository } from './DAO/proposal.repository';
 import { SFTPProvider } from './utils/providers/sftp/sftp-provider';
+import { SendProposalService } from './services/send-proposal.service';
 
 @Module({
   imports: [
