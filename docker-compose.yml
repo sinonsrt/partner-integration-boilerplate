@@ -12,9 +12,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: PARTNER_INTEGRATION
   sftp:
+    container_name: sftp
     image: atmoz/sftp
     volumes:
-      - ./upload:/home/test/upload
+      - ./docker/upload:/home/test/upload
     ports:
       - '2222:22'
     command: test:pass:1001

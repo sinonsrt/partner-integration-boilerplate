@@ -1,5 +1,6 @@
 export enum StatusEnum {
   success = 'ENVIADO',
-  notSent = 'NÃO ENVIADO',
-  notIntegrated = 'NÃO INTEGRADO',
+  notSent = 'NAO ENVIADO',
+  cancelled = 'CANCELADO',
+  notIntegrated = 'NAO INTEGRADO',
 }

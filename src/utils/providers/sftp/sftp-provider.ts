@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { existsSync, createReadStream, unlinkSync } from 'fs';
+import { StatusEnum } from 'src/utils/enums/StatusEnum';
 import ssh2 from 'ssh2';
 import ClientType from 'ssh2-sftp-client';
 
@@ -29,18 +30,20 @@ export class SFTPProvider {
     const tmpFileExists = existsSync(filePath);
 
     if (tmpFileExists) {
-      await this.connection
+      return this.connection
         .then(async () => {
           console.log('SFTP conectado com sucesso!');
 
           await this.sftp.put(
             createReadStream(filePath),
-            `./upload/${filename}.txt`,
+            `./upload/${filename}`,
           );
 
           unlinkSync(filePath);
 
-          return this.sftp.end();
+          await this.sftp.end();
+
+          return StatusEnum.success;
         })
         .catch((error: any) => {
           console.log(
@@ -49,6 +52,7 @@ export class SFTPProvider {
           );
 
           unlinkSync(filePath);
+          return StatusEnum.notIntegrated;
         });
     }
   }
